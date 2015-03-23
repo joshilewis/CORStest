@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CORS Test</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body>
+<h1>CORS Test</h1>
+Enter the URL for the CORS request: <input type="text" id="requestUrl"/><br/>
+<input type="submit" id="submit"/>
+
+<hr/>
+<div id="cors">
+    
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#submit').click(sendRequest);
+    });
+
+    function sendRequest() {
+		$('#cors').html("");
+		
+		$.ajax({
+			url: $('#requestUrl').val(),
+		})
+		.done(function( data, textStatus, jqXHR) {
+			$('#cors').html(data);
+		})
+		.fail(function( jqXHR, textStatus, errorThrown) {
+			$('#cors').html("The request failed. Please check your browser console for more details.");
+		});
+    };
+	
+</script>
+</body>
+</html>
